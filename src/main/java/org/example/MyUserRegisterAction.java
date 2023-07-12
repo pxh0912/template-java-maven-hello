@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class MyUserRegisterAction implements MyAction {
 
-    private static final String ACTION_NAME = "register";
+    private static final String ACTION_NAME = "注册";
 
     private Scanner scanner = null;
     private MyUserManager userManager = null;

@@ -1,51 +1,67 @@
 package org.example;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.Scanner;
 
 public class MyUserManager {
-    private static final String DB_URL = "jdbc:sqlite:users.db";
+    private Scanner scanner;
+    private MyUserRegisterAction userRegisterAction;
+    private MyUserLoginAction userLoginAction;
+
+    public MyUserManager(Scanner scanner) {
+        this.scanner = scanner;
+        this.userRegisterAction = new MyUserRegisterAction(scanner, this);
+        this.userLoginAction = new MyUserLoginAction(scanner, this);
+    }
 
     public boolean registerUser(String username, String password) {
-        try (Connection connection = DriverManager.getConnection(DB_URL);
-             PreparedStatement statement = connection.prepareStatement("INSERT INTO Users (username, password) VALUES (?, ?)")) {
-            statement.setString(1, username);
-            statement.setString(2, password);
-            statement.executeUpdate();
-            System.out.println("User registered successfully!");
-
-            return true;
-        } catch (SQLException e) {
-            System.out.println("Failed to register user: " + e.getMessage());
-        }
-
-        return false;
+        MyUser user = new MyUser();
+        return user.registerUser(username, password);
     }
 
     public boolean login(String username, String password) {
-        try (Connection connection = DriverManager.getConnection(DB_URL);
-             PreparedStatement statement = connection.prepareStatement("SELECT * FROM Users WHERE username = ?")) {
-            statement.setString(1, username);
-            ResultSet resultSet = statement.executeQuery();
-    
-            if (resultSet.next()) {
-                String storedPassword = resultSet.getString("password");
-                if (password.equals(storedPassword)) {
-                    System.out.println("Login successful!");
-                    return true;
-                } else {
-                    System.out.println("Incorrect password.");
-                }
-            } else {
-                System.out.println("Username does not exist.");
+        MyUser user = new MyUser();
+        return user.login(username, password);
+    }
+
+    public void managePassword() {
+        // Password management logic
+    }
+
+    public void shopping() {
+        // Shopping logic
+    }
+
+    public void userMenu() {
+        while (true) {
+            System.out.println("用户手册:");
+            System.out.println("1. 注册");
+            System.out.println("2. 登录");
+            System.out.println("3. 密码管理");
+            System.out.println("4. 购物");
+            System.out.println("5. 退出登录");
+            System.out.print("请输入您的选择: ");
+
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (choice) {
+                case 1:
+                    userRegisterAction.run(null);
+                    break;
+                case 2:
+                    userLoginAction.run(null);
+                    break;
+                case 3:
+                    managePassword();
+                    break;
+                case 4:
+                    shopping();
+                    break;
+                case 5:
+                    return;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
             }
-        } catch (SQLException e) {
-            System.out.println("Failed to login: " + e.getMessage());
         }
-    
-        return false;
     }
 }

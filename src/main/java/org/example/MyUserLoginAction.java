@@ -21,7 +21,6 @@ public class MyUserLoginAction implements MyAction {
 
     @Override
     public void run(String[] args) {
-        System.out.println("现在你在用户登录子菜单里.");
 
         while (true) {
             System.out.print("用户名：");

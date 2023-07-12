@@ -11,11 +11,16 @@ public class DatabaseInitializer {
     public void initializeDatabase() {
         try (Connection connection = DriverManager.getConnection(DB_URL);
              Statement statement = connection.createStatement()) {
-            String createTableQuery = "CREATE TABLE IF NOT EXISTS Users (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, password TEXT)";
-            statement.executeUpdate(createTableQuery);
+            String createUserTableQuery = "CREATE TABLE IF NOT EXISTS Users (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, password TEXT)";
+            statement.executeUpdate(createUserTableQuery);
+
+            String createAdminTableQuery = "CREATE TABLE IF NOT EXISTS Admins (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, password TEXT)";
+            statement.executeUpdate(createAdminTableQuery);
+
             System.out.println("Database initialized successfully!");
         } catch (SQLException e) {
             System.out.println("Failed to initialize database: " + e.getMessage());
         }
     }
 }
+
