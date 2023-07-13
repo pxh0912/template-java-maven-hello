@@ -1,3 +1,4 @@
 target/
-src/main/java/org/example/Main.java
 *.db
+
+python/name_list.csv
