@@ -1,4 +1,5 @@
 package org.example;
+
 import java.util.Scanner;
 
 public class MyAdminLoginAction implements MyAction {
@@ -33,12 +34,11 @@ public class MyAdminLoginAction implements MyAction {
 
             if (success) {
                 System.out.println("管理员登录成功！");
+                adminManager.setCurrentAdmin(username); // 设置当前管理员用户名
                 break;
             } else {
                 System.out.println("管理员登录失败，请重试。");
             }
         }
     }
-
 }
-
