@@ -205,11 +205,42 @@ public class MyUserManager {
     private void checkout() {
         // 实际付账操作，修改相应的商品数量和购物历史记录
         // 这里只是一个简化示例，没有实际付账逻辑
-
+    
+        // 用户选择支付方式
+        System.out.println("请选择支付方式:");
+        System.out.println("1. 微信支付");
+        System.out.println("2. 支付宝支付");
+        System.out.print("请输入您的选择: ");
+        int paymentChoice = scanner.nextInt();
+        scanner.nextLine(); // 消耗换行符
+    
+        switch (paymentChoice) {
+            case 1:
+                weChatPayment();
+                break;
+            case 2:
+                aliPayPayment();
+                break;
+            default:
+                System.out.println("无效的选择，请重试。");
+                return;
+        }
+    
         // 模拟付账后，清空购物车
         shoppingCart.clear();
         System.out.println("付账成功！");
     }
+    
+    private void weChatPayment() {
+        // 模拟微信支付操作，可以在此处实现相关逻辑
+        System.out.println("正在使用微信支付...");
+    }
+    
+    private void aliPayPayment() {
+        // 模拟支付宝支付操作，可以在此处实现相关逻辑
+        System.out.println("正在使用支付宝支付...");
+    }
+    
 
     private void viewPurchaseHistory() {
         // 查询购物历史记录并显示时间和购买的商品清单
