@@ -3,6 +3,13 @@
     "configurations": [
       {
         "type": "java",
+        "name": "ShoppingSystem",
+        "request": "launch",
+        "mainClass": "ShoppingSystem",
+        "projectName": "Template-Java-Projects-with-Maven"
+      },
+      {
+        "type": "java",
         "name": "DatabaseQueryExample",
         "request": "launch",
         "mainClass": "org.example.DatabaseQueryExample",
